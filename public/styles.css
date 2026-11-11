@@ -1312,7 +1312,7 @@ code {
 }
 
 .footer-bar {
-  margin-top: 32px;
+  margin-top: 24px;
   padding-top: 18px;
   padding-bottom: 32px;
   border-top: 2px dashed var(--border-color);
@@ -1322,6 +1322,114 @@ code {
   gap: 10px;
   font-size: 12.5px;
   color: var(--ink-muted);
+}
+
+.footer-bar a {
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.footer-bar a:hover {
+  text-decoration: underline;
+}
+
+/* Admin Contact Pills & Chibi Card */
+.admin-pill {
+  text-decoration: none;
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  border: 2px solid #4a1d5e;
+  box-shadow: 0 3px 0 #4a1d5e;
+  transition: transform 0.15s, filter 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-pill:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.zalo-pill {
+  background: linear-gradient(135deg, #0068ff 0%, #38bdf8 100%);
+  color: #ffffff;
+}
+
+.tele-pill {
+  background: linear-gradient(135deg, #229ed9 0%, #6366f1 100%);
+  color: #ffffff;
+}
+
+.admin-contact-card {
+  margin-top: 26px;
+  background: var(--surface);
+  border: 3px solid var(--border-color);
+  border-radius: 26px;
+  padding: 18px 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-crown-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fde047 0%, #ff7eb3 100%);
+  border: 2.5px solid #4a1d5e;
+  box-shadow: 0 4px 0 #4a1d5e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.admin-name-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.admin-name-title strong {
+  color: var(--primary);
+}
+
+.admin-sub-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.admin-contact-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-zalo {
+  background: linear-gradient(135deg, #0068ff 0%, #0ea5e9 100%);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-tele {
+  background: linear-gradient(135deg, #229ed9 0%, #6366f1 100%);
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .toast {

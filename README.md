@@ -23,3 +23,8 @@ npm test
 
 ## ☁️ Triển khai lên Vercel
 Dự án được thiết kế sẵn cấu trúc Serverless (`api/check-bin.js`, `api/check-card-status.js`, `api/health.js`) tương thích 100% với **Vercel** mà không cần cấu hình phức tạp.
+
+## 👑 Thông tin Quản trị viên (Admin)
+- **Admin**: Đường Thọ
+- **Zalo**: [0934415387](https://zalo.me/0934415387)
+- **Telegram**: [@dongtho8888](https://t.me/dongtho8888)
