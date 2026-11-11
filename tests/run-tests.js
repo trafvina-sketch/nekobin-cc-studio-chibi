@@ -8,7 +8,7 @@ const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
-const { createServer } = require("../server");
+const { createServer } = require("../scripts/dev-server");
 const { validateLuhn, detectNetwork, resolveBinServer } = require("../lib/bin-core");
 
 async function runAllTests() {
@@ -40,8 +40,8 @@ async function runAllTests() {
   ok("6-Digit vs 8-Digit Sub-Allocation BIN Resolution (542432 US vs 54243223 NP, 970436 VN)");
 
   // 3. Frontend app.js JavaScript Syntax & DOM ID Integrity Verification
-  const appJsCode = fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8");
-  const indexHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+  const appJsCode = fs.readFileSync(path.join(__dirname, "..", "public", "app.js"), "utf8");
+  const indexHtml = fs.readFileSync(path.join(__dirname, "..", "public", "index.html"), "utf8");
   new vm.Script(appJsCode, { filename: "app.js" });
   const htmlIds = new Set([...indexHtml.matchAll(/id="([^"]+)"/g)].map((m) => m[1]));
   const jsIds = [...new Set([...appJsCode.matchAll(/getElementById\("([^"]+)"\)/g)].map((m) => m[1]))];

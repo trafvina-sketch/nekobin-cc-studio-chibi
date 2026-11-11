@@ -2,20 +2,12 @@
   "name": "nekobin-cc-studio-chibi",
   "version": "4.0.0",
   "description": "NekoBIN & CC Studio Chibi v4.0 — Modern Kawaii 6-8 Digit BIN/IIN Inspector, ISO/IEC 7812 Anatomy, Luhn Mod-10 Visualizer, BIN Comparator & QA Sandbox Generator",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node scripts/dev-server.js",
     "test": "node tests/run-tests.js"
   },
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": [
-    "bin-lookup",
-    "luhn-validator",
-    "iso-7812",
-    "chibi-ui",
-    "qa-sandbox"
-  ],
   "license": "MIT"
 }

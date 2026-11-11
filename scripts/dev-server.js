@@ -1,18 +1,18 @@
 /**
- * NekoBIN & CC Studio Chibi v4.0 — Local Standalone HTTP Server
- * Reuses the exact same Vercel Serverless Function handlers in ./api/*
+ * NekoBIN & CC Studio Chibi v4.0 — Local Development Server
+ * Serves ./public/* static files and ./api/* Vercel Serverless handlers
  */
 
 const http = require("http");
 const path = require("path");
 const fs = require("fs");
 
-const checkBinHandler = require("./api/check-bin");
-const checkCardStatusHandler = require("./api/check-card-status");
-const healthHandler = require("./api/health");
+const checkBinHandler = require("../api/check-bin");
+const checkCardStatusHandler = require("../api/check-card-status");
+const healthHandler = require("../api/health");
 
 const PORT = process.env.PORT || 3000;
-const PUBLIC_DIR = __dirname;
+const PUBLIC_DIR = path.join(__dirname, "..", "public");
 
 const ALLOWED_STATIC = new Set([
   "/index.html",
