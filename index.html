@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="sakura">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✨ NekoBIN &amp; CC Studio Chibi v4.0 — Trợ Lý Soi BIN 6–8 Số, Luhn &amp; QA Sandbox ✨</title>
+  <meta name="description" content="Trợ lý Thám tử Chibi soi BIN 6–8 số chuẩn ISO/IEC 7812, Lật thẻ 3D Hologram, Bảng tính Luhn từng bước, So sánh 2 đầu BIN, Cố vấn Vùng AVS &amp; Bộ thẻ QA Sandbox." />
+  <meta property="og:title" content="✨ NekoBIN &amp; CC Studio Chibi v4.0 ✨" />
+  <meta property="og:description" content="Soi BIN 6–8 số siêu tốc, Giải phẫu 4 khối ISO/IEC 7812, So sánh BIN, Lọc thẻ thông minh &amp; Đúc thẻ chuẩn Luhn phong cách Chibi Kawaii!" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#ff6b9d" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=JetBrains+Mono:wght@500;700;800&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- FLOATING CUTE BACKGROUND DECORATIONS -->
+  <div class="bg-decorations" aria-hidden="true">
+    <span class="floater f1">🌸</span>
+    <span class="floater f2">✨</span>
+    <span class="floater f3">🐾</span>
+    <span class="floater f4">⭐</span>
+    <span class="floater f5">🍬</span>
+    <span class="floater f6">💖</span>
+  </div>
+
+  <!-- TOP HEADER -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mascot-mini">🐱✨</div>
+        <div>
+          <div class="brand-title">
+            NekoBIN &amp; CC Studio
+            <span class="badge-clean">🐾 CHIBI CLOUD v4.0</span>
+          </div>
+          <div class="brand-sub">
+            Thám tử Chibi soi BIN 6–8 số, Lật thẻ 3D, So sánh BIN, Giải phẫu ISO/IEC 7812 &amp; QA Sandbox
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button type="button" id="btnSoundToggle" class="chibi-pill-btn" title="Bật/Tắt hiệu ứng âm thanh Chibi (Tự lưu)">
+          🔊 Âm thanh: BẬT
+        </button>
+        <button type="button" id="btnThemeToggle" class="chibi-pill-btn" title="Đổi giao diện Sáng Sakura / Tối Starry (Tự lưu)">
+          🌙 Đổi sang Tối (Starry)
+        </button>
+        <div class="security-pill" id="cloudHealthPill" title="Trạng thái máy chủ sạch 100% chuẩn PCI-DSS">
+          <span class="dot-online"></span> Sạch 100% · PCI-Safe
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-layout">
+    <!-- INTERACTIVE CHIBI MASCOT COMPANION BANNER -->
+    <div class="chibi-companion-bar">
+      <div class="chibi-avatar-box" id="chibiAvatarBox" title="Chọt vào Neko để nghe bí kíp mới nha!">
+        <svg class="chibi-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff85b3" />
+              <stop offset="100%" stop-color="#a855f7" />
+            </linearGradient>
+            <linearGradient id="hatGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#6366f1" />
+            </linearGradient>
+          </defs>
+          <circle cx="70" cy="72" r="60" fill="#fff0f6" stroke="#ffadd2" stroke-width="4" />
+          <!-- Cat Ears -->
+          <polygon points="26,52 38,16 60,40" fill="url(#hairGrad)" stroke="#4a1d5e" stroke-width="3.5" stroke-linejoin="round" />
+          <polygon points="33,46 40,24 54,39" fill="#ffcfe2" />
+          <polygon points="114,52 102,16 80,40" fill="url(#hairGrad)" stroke="#4a1d5e" stroke-width="3.5" stroke-linejoin="round" />
+          <polygon points="107,46 100,24 86,39" fill="#ffcfe2" />
+          <!-- Hair Back -->
+          <path d="M24,68 C18,95 28,118 42,122 L98,122 C112,118 122,95 116,68 Z" fill="url(#hairGrad)" stroke="#4a1d5e" stroke-width="3.5" />
+          <!-- Chibi Face -->
+          <rect x="33" y="42" width="74" height="64" rx="30" fill="#fff5ee" stroke="#4a1d5e" stroke-width="3.5" />
+          <!-- Cute Bangs -->
+          <path d="M32,62 C36,34 104,34 108,62 C98,48 88,58 82,46 C74,60 66,60 58,46 C50,58 40,48 32,62 Z" fill="url(#hairGrad)" stroke="#4a1d5e" stroke-width="3.5" stroke-linejoin="round" />
+          <!-- Rosy Cheeks -->
+          <ellipse cx="45" cy="82" rx="7" ry="4" fill="#ff8fab" opacity="0.7" />
+          <ellipse cx="95" cy="82" rx="7" ry="4" fill="#ff8fab" opacity="0.7" />
+          <!-- Big Sparkly Anime Eyes -->
+          <g id="chibiEyes">
+            <ellipse cx="52" cy="74" rx="7.5" ry="9" fill="#3b1d5e" />
+            <circle cx="49.5" cy="70.5" r="3" fill="#ffffff" />
+            <circle cx="54.5" cy="77" r="1.5" fill="#ffffff" />
+            <ellipse cx="88" cy="74" rx="7.5" ry="9" fill="#3b1d5e" />
+            <circle cx="85.5" cy="70.5" r="3" fill="#ffffff" />
+            <circle cx="90.5" cy="77" r="1.5" fill="#ffffff" />
+          </g>
+          <!-- Cute Cat Mouth -->
+          <path id="chibiMouth" d="M63,86 Q66.5,91 70,86 Q73.5,91 77,86" fill="none" stroke="#4a1d5e" stroke-width="3" stroke-linecap="round" />
+          <!-- Detective Beret -->
+          <ellipse cx="70" cy="34" rx="26" ry="8" fill="url(#hatGrad)" stroke="#4a1d5e" stroke-width="3" />
+          <circle cx="70" cy="25" r="5" fill="#fde047" stroke="#4a1d5e" stroke-width="2.5" />
+          <!-- Paws -->
+          <ellipse cx="38" cy="108" rx="9" ry="7" fill="#fff5ee" stroke="#4a1d5e" stroke-width="3" />
+          <ellipse cx="102" cy="108" rx="9" ry="7" fill="#fff5ee" stroke="#4a1d5e" stroke-width="3" />
+        </svg>
+        <span class="chibi-mood-badge" id="chibiMoodBadge">🕵️‍♀️ Thám tử Neko</span>
+      </div>
+
+      <div class="chibi-speech-bubble">
+        <div class="speech-header">
+          <span class="speech-name">✨ Trợ lý Neko-chan nhắn nhủ:</span>
+          <div class="mood-btn-group">
+            <button type="button" class="mood-mini-btn" data-mood="idle" title="Bình thường">😺 Idle</button>
+            <button type="button" class="mood-mini-btn" data-mood="happy" title="Vui vẻ">😻 Happy</button>
+            <button type="button" class="mood-mini-btn" data-mood="shock" title="Bất ngờ">🙀 Shock</button>
+            <button type="button" class="mood-mini-btn" data-mood="cool" title="Ngầu lòi">😎 Cool</button>
+            <span class="speech-tag" id="chibiStatusTag">Sẵn sàng làm việc ~ Nyann!</span>
+          </div>
+        </div>
+        <div class="speech-text" id="chibiSpeechText">
+          Chào cậu nha! Bản <strong>v4.0 Cloud</strong> đã nâng cấp <strong>Lật thẻ 3D mặt trước/sau</strong>, <strong>Lọc thẻ thông minh từ văn bản hỗn hợp</strong>, <strong>Chạy đa luồng 6x siêu tốc</strong> và <strong>So sánh 2 đầu BIN</strong> rồi đó! 🐾💖
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="nav-tabs" aria-label="Phân hệ chức năng">
+      <button class="tab-btn active" data-tab="tab-inspector">
+        <span class="tab-icon">🔍</span> Soi BIN &amp; Thẻ 3D (6–8 Số)
+      </button>
+      <button class="tab-btn" data-tab="tab-bulk">
+        <span class="tab-icon">⚡</span> Bulk Check Đa Luồng
+      </button>
+      <button class="tab-btn" data-tab="tab-generator">
+        <span class="tab-icon">🪄</span> Xưởng Đúc Thẻ CSPRNG
+      </button>
+      <button class="tab-btn" data-tab="tab-compare">
+        <span class="tab-icon">🆚</span> So Sánh BIN &amp; Thẻ Sandbox
+      </button>
+      <button class="tab-btn" data-tab="tab-bindb">
+        <span class="tab-icon">🏦</span> Kho Báu 60+ BIN VN &amp; QT
+      </button>
+    </nav>
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: BINCODES & ISO/IEC 7812 INSPECTOR PRO                        -->
+    <!-- =================================================================== -->
+    <section id="tab-inspector" class="tab-panel active">
+      <div class="grid-2col">
+        <!-- LEFT: INPUT & 3D FLIP HOLOGRAPHIC CHIBI CARD -->
+        <div class="card">
+          <div class="card-header">
+            <h2>🎀 Nhập Mã BIN (6–8 số) hoặc Thẻ Đầy Đủ</h2>
+            <span class="sub-badge">Chuẩn ISO/IEC 7812:2017</span>
+          </div>
+
+          <div class="form-group">
+            <label for="singleBinInput">Nhập 6–8 số đầu (BIN) hoặc chuỗi <code>PAN|MM|YY|CVV</code>:</label>
+            <div class="input-with-btn">
+              <input
+                type="text"
+                id="singleBinInput"
+                class="text-input mono-input input-xl"
+                placeholder="VD: 54243223 hoặc 4242424242424242|12|28|888"
+                value="54243223"
+                autocomplete="off"
+              />
+              <button type="button" id="btnInspectSingle" class="btn btn-primary">🔍 Soi Ngay!</button>
+            </div>
+
+            <div class="sample-chips">
+              <span class="chip-label">🍬 Kẹo BIN mẫu:</span>
+              <button type="button" class="inspector-chip" data-val="54243223">54243223 (8-số Nepal/MC)</button>
+              <button type="button" class="inspector-chip" data-val="414720">414720 (Chase Visa)</button>
+              <button type="button" class="inspector-chip" data-val="516815">516815 (Apple Card)</button>
+              <button type="button" class="inspector-chip" data-val="490301">490301 (Revolut Prepaid)</button>
+              <button type="button" class="inspector-chip" data-val="970436">970436 (Vietcombank)</button>
+              <button type="button" class="inspector-chip" data-val="378282246310005|08|29|8421">Amex 15 số</button>
+            </div>
+
+            <!-- Recent BIN History Bar -->
+            <div class="history-bar hidden" id="recentHistoryBar">
+              <span class="chip-label">🕘 Vừa soi:</span>
+              <div id="recentHistoryChips" class="history-chips"></div>
+              <button type="button" id="btnClearHistory" class="link-mini-btn" title="Xóa lịch sử soi BIN">Xóa</button>
+            </div>
+          </div>
+
+          <!-- Interactive 3D Tilt & Flip Holographic Chibi Card -->
+          <div class="visual-card-scene" id="visualCardScene">
+            <div class="visual-card-flipper" id="visualCardFlipper">
+              <!-- FRONT FACE -->
+              <div id="visualCard" class="visual-card visual-card-front brand-mastercard">
+                <div class="vc-holo-glare"></div>
+                <div class="vc-deco-sticker">🐾✨</div>
+                <div class="vc-top">
+                  <div class="vc-chip">
+                    <div class="vc-chip-line"></div>
+                  </div>
+                  <div class="vc-top-right">
+                    <span class="vc-contactless" title="Contactless NFC">)))</span>
+                    <div class="vc-scheme" id="vcScheme">MASTERCARD</div>
+                  </div>
+                </div>
+                <div class="vc-pan mono" id="vcPan">5424 3223 •••• ••••</div>
+                <div class="vc-meta-strip mono">
+                  <span>EXP: <strong id="vcExp">12/29</strong></span>
+                  <span>LEN: <strong id="vcLen">16 SỐ</strong></span>
+                </div>
+                <div class="vc-bottom">
+                  <div>
+                    <div class="vc-label">NGÂN HÀNG PHÁT HÀNH</div>
+                    <div class="vc-val" id="vcBank">Đang phân tích...</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="vc-label">QUỐC GIA &amp; HẠNG</div>
+                    <div class="vc-val" id="vcCountry">--</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="visual-card visual-card-back" id="visualCardBack">
+                <div class="vc-magstripe"></div>
+                <div class="vc-back-body">
+                  <div class="vc-sig-row">
+                    <div class="vc-signature">NEKO DETECTIVE VERIFIED 🐾</div>
+                    <div class="vc-cvv-box mono" id="vcCvvBack">888</div>
+                  </div>
+                  <div class="vc-back-info">
+                    <div><strong>MII Industry:</strong> <span id="vcBackMii">--</span></div>
+                    <div><strong>AVS / Region:</strong> <span id="vcBackAvs">--</span></div>
+                    <div><strong>ISO Currency:</strong> <span id="vcBackCurr">--</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="action-row" style="margin-top:16px;flex-wrap:wrap">
+            <button type="button" id="btnFlipCard" class="btn btn-outline btn-sm">
+              🔄 Lật Mặt Sau Thẻ
+            </button>
+            <button type="button" id="btnFixLuhnSingle" class="btn btn-magic btn-sm">
+              🪄 Tự Điền / Sửa Số Cuối Luhn
+            </button>
+            <button type="button" id="btnGenFromThisBin" class="btn btn-outline btn-sm">
+              🎴 Đúc 20 Thẻ Từ BIN Này
+            </button>
+            <button type="button" id="btnSendToCompare" class="btn btn-outline btn-sm">
+              🆚 Đưa Vào So Sánh BIN
+            </button>
+            <button type="button" id="btnCopyBinReport" class="btn btn-outline btn-sm">
+              📋 Copy Hồ Sơ
+            </button>
+          </div>
+
+          <!-- Regional / AVS / 3DS Smart Advice Box -->
+          <div class="note-box" id="regionAdviceBox">
+            💡 Nhập 6–8 số đầu (BIN) để xem Ngân hàng phát hành, Quốc gia gốc, Loại thẻ (Credit/Debit/Prepaid) và chính sách kiểm tra AVS / 3DS.
+          </div>
+        </div>
+
+        <!-- RIGHT: DEEP BINCODES DETAILS -->
+        <div class="card">
+          <div class="card-header">
+            <h2>📊 Hồ Sơ Đầu BIN Chi Tiết (Chuẩn BINCodes)</h2>
+            <span id="binStatusBadge" class="tag tag-amber">⏳ Chưa kiểm tra</span>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row">
+              <span class="info-key">🏷️ Đầu BIN (IIN 6 / 8 số):</span>
+              <span class="info-val mono" id="valBinPrefix">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">🏭 Ngành công nghiệp (MII):</span>
+              <span class="info-val" id="valMii">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">💳 Tổ chức thẻ (Scheme):</span>
+              <span class="info-val" id="valScheme">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">💰 Loại thẻ (Funding Type):</span>
+              <span class="info-val" id="valType">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">👑 Hạng thẻ (Card Tier):</span>
+              <span class="info-val" id="valTier">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">🏦 Ngân hàng (Issuing Bank):</span>
+              <span class="info-val" id="valBank">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">🌍 Quốc gia đăng ký BIN:</span>
+              <span class="info-val" id="valCountry">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">🪙 Tiền tệ &amp; Mã ISO N3:</span>
+              <span class="info-val mono" id="valCurrency">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">📏 Độ dài PAN &amp; CVV chuẩn:</span>
+              <span class="info-val mono" id="valLengthSpec">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">🧮 Toán học Luhn (Mod 10):</span>
+              <span class="info-val" id="valLuhn">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">🛡️ Chính sách Vùng / AVS:</span>
+              <span class="info-val" id="valAvsPolicy">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">📡 Nguồn đối chiếu:</span>
+              <span class="info-val" id="valSource" style="font-size:12px;opacity:0.85">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANATOMY & LUHN STEP-BY-STEP PANEL -->
+      <div class="card" style="margin-top:22px">
+        <div class="card-header">
+          <h2>🧬 Giải Phẫu 4 Khối ISO/IEC 7812 &amp; Bảng Nhân Đôi Luhn Từng Bước</h2>
+          <span class="sub-badge mono" id="expectedCheckDigitText">--</span>
+        </div>
+
+        <div class="anatomy-grid">
+          <div class="anatomy-box b1">
+            <div class="anatomy-icon">1️⃣</div>
+            <div class="anatomy-digits" id="anatMii">-</div>
+            <div class="anatomy-label">Số đầu (MII - Ngành)</div>
+          </div>
+          <div class="anatomy-box b2">
+            <div class="anatomy-icon">🏦</div>
+            <div class="anatomy-digits" id="anatIin">------</div>
+            <div class="anatomy-label">6–8 số đầu (BIN Ngân hàng)</div>
+          </div>
+          <div class="anatomy-box b3">
+            <div class="anatomy-icon">🔐</div>
+            <div class="anatomy-digits" id="anatAcc">-------</div>
+            <div class="anatomy-label">Số định danh Tài khoản</div>
+          </div>
+          <div class="anatomy-box b4">
+            <div class="anatomy-icon">🎯</div>
+            <div class="anatomy-digits" id="anatCheck">-</div>
+            <div class="anatomy-label">Số cuối (Luhn Checksum)</div>
+          </div>
+        </div>
+
+        <div class="luhn-steps" id="luhnStepsBox"></div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: CONCURRENT BULK CHECKER & SMART EXTRACTOR                    -->
+    <!-- =================================================================== -->
+    <section id="tab-bulk" class="tab-panel">
+      <div class="grid-2col">
+        <!-- Input Column -->
+        <div class="card">
+          <div class="card-header">
+            <h2>📥 Giỏ Danh Sách BIN &amp; Thẻ (Đa Luồng 6x)</h2>
+            <div class="header-actions">
+              <label class="btn btn-sm btn-outline" for="file-upload">📂 Mở File (.txt/.csv)</label>
+              <input id="file-upload" type="file" accept=".txt,.csv" hidden />
+              <button type="button" id="btn-sample-bulk" class="btn btn-sm btn-outline">🍬 Đổ Mẫu</button>
+              <button type="button" id="btn-smart-extract" class="btn btn-sm btn-outline" title="Tự động bóc tách thẻ/BIN từ đoạn chat, email hoặc log lộn xộn">🧹 Lọc Văn Bản Hỗn Hợp</button>
+              <button type="button" id="btn-fix-bulk-luhn" class="btn btn-sm btn-magic">🪄 Sửa Luhn Tất Cả</button>
+            </div>
+          </div>
+          <p class="help-text">
+            Nhập mỗi dòng 1 mã BIN (6–8 số) hoặc <code>PAN|MM|YYYY|CVV</code> — hoặc dán cả đoạn chat lộn xộn rồi bấm <strong>🧹 Lọc Văn Bản Hỗn Hợp</strong>!
+          </p>
+          <textarea
+            id="bulk-input"
+            class="code-textarea"
+            rows="9"
+            placeholder="54243223&#10;4242424242424242|12|28|123&#10;4000000000009995|08|29|456&#10;4903011234567890|05|27|889&#10;9704361234567895|11|30|999"
+          ></textarea>
+
+          <div class="options-bar">
+            <label class="checkbox-label">
+              <input type="checkbox" id="opt-dedup" checked /> ✨ Lọc bỏ trùng lặp
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="opt-check-exp" checked /> 📅 Kiểm tra hạn MM/YY
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="opt-mask-pan" /> 🙈 Che số giữa (Mask)
+            </label>
+          </div>
+
+          <div class="gateway-box">
+            <div class="gateway-row">
+              <label for="check-mode">⚙️ Chọn Chế Độ Kiểm Tra:</label>
+              <select id="check-mode" class="select-input">
+                <option value="luhn">🧬 Soi BINCodes Batch + Toán học Luhn + Cố vấn Vùng AVS (Siêu tốc)</option>
+                <option value="stripe_sim">🧪 Mô phỏng Cổng Sandbox Quốc Tế (Approved / 3DS / Insufficient / CVC)</option>
+                <option value="stripe_key">🔑 Kiểm tra với Stripe Sandbox Key (Chỉ sk_test_... chuẩn PCI-DSS)</option>
+                <option value="custom_api">🌐 Kết nối Webhook / Sandbox API riêng (Custom Endpoint)</option>
+              </select>
+            </div>
+            <div id="stripe-key-wrap" class="gateway-custom hidden">
+              <input
+                type="password"
+                id="stripe-secret-key"
+                class="text-input mono-input"
+                placeholder="Nhập khóa thử nghiệm Stripe Sandbox (sk_test_...)"
+              />
+            </div>
+            <div id="custom-api-wrap" class="gateway-custom hidden">
+              <input
+                type="url"
+                id="custom-api-url"
+                class="text-input"
+                placeholder="Nhập URL API kiểm tra (POST JSON: {cardNumber, mm, yy, cvv})"
+              />
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div id="bulkProgressWrap" class="progress-wrap hidden">
+            <div class="progress-meta">
+              <span id="bulkProgressLabel">⚡ Đang chạy đa luồng...</span>
+              <span id="bulkProgressPct" class="mono">0%</span>
+            </div>
+            <div class="progress-track">
+              <div id="bulkProgressBar" class="progress-fill" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div class="action-row" style="flex-wrap:wrap">
+            <button type="button" id="btn-start-bulk" class="btn btn-primary btn-lg">
+              🚀 Bắt Đầu Phân Tích (<span id="bulk-line-count">0</span> dòng)
+            </button>
+            <button type="button" id="btn-stop-bulk" class="btn btn-danger hidden">⏹️ Dừng</button>
+            <button type="button" id="btn-clear-bulk" class="btn btn-outline">🗑️ Dọn Sạch</button>
+          </div>
+        </div>
+
+        <!-- Summary & Stats Column -->
+        <div class="card">
+          <div class="card-header">
+            <h2>📊 Bảng Điểm Thống Kê &amp; Xuất Quà</h2>
+            <div class="export-group">
+              <button type="button" id="btn-copy-live" class="btn btn-sm btn-success">📋 Copy HỢP LỆ / LIVE</button>
+              <button type="button" id="btn-export-csv" class="btn btn-sm btn-outline">📥 CSV</button>
+              <button type="button" id="btn-export-txt" class="btn btn-sm btn-outline">📥 TXT</button>
+              <button type="button" id="btn-export-json" class="btn btn-sm btn-outline">📥 JSON</button>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box total">
+              <div class="stat-emoji">📦</div>
+              <span class="stat-label">Tổng dòng</span>
+              <strong id="stat-total" class="stat-num">0</strong>
+            </div>
+            <div class="stat-box live">
+              <div class="stat-emoji">💖</div>
+              <span class="stat-label">Hợp lệ / LIVE</span>
+              <strong id="stat-live" class="stat-num">0</strong>
+            </div>
+            <div class="stat-box binonly">
+              <div class="stat-emoji">🏷️</div>
+              <span class="stat-label">Đầu BIN (6–8)</span>
+              <strong id="stat-binonly" class="stat-num">0</strong>
+            </div>
+            <div class="stat-box dead">
+              <div class="stat-emoji">💥</div>
+              <span class="stat-label">Sai Luhn / DEAD</span>
+              <strong id="stat-dead" class="stat-num">0</strong>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <button type="button" class="filter-pill active" data-filter="ALL">🌈 Tất cả</button>
+            <button type="button" class="filter-pill" data-filter="LIVE">💖 Hợp lệ / LIVE</button>
+            <button type="button" class="filter-pill" data-filter="BIN">🏷️ Chỉ đầu BIN</button>
+            <button type="button" class="filter-pill" data-filter="DEAD">💥 Sai Luhn / DEAD</button>
+          </div>
+
+          <div class="form-group" style="margin-top:10px;margin-bottom:0">
+            <input
+              type="text"
+              id="bulkSearchInput"
+              class="text-input"
+              placeholder="🔎 Lọc nhanh trong kết quả (Ngân hàng, Quốc gia, Visa, Prepaid, BIN...)"
+            />
+          </div>
+
+          <div class="note-box" style="margin-top:14px">
+            ✨ <strong>Nâng cấp v4.0:</strong> Hệ thống tự động gom nhóm các mã BIN trùng nhau để gọi <strong>Batch Cloud API 1 lần duy nhất</strong> rồi chạy song song 6 luồng siêu mượt! Bấm vào dòng bất kỳ để mở Giải phẫu 4 khối nha! 🐾
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL-WIDTH BULK INSPECTOR TABLE -->
+      <div class="card" style="margin-top:22px">
+        <div class="card-header">
+          <h2>📑 Bảng Kết Quả Phân Tích Danh Sách BIN, Luhn Mod-10 &amp; Chính Sách Vùng / AVS</h2>
+          <span class="sub-badge" id="bulkSummaryText">0 dòng</span>
+        </div>
+        <div class="table-container" style="max-height:520px">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Đầu BIN (6/8)</th>
+                <th>Số thẻ / Đầu vào</th>
+                <th>Mạng thẻ</th>
+                <th>Loại &amp; Hạng</th>
+                <th>Ngân hàng (Issuer)</th>
+                <th>Quốc gia BIN</th>
+                <th>Luhn (Mod 10)</th>
+                <th>Hạn MM/YY</th>
+                <th>Đánh giá Vùng / Trạng thái</th>
+                <th>Copy</th>
+              </tr>
+            </thead>
+            <tbody id="bulk-results-body">
+              <tr>
+                <td colspan="11" class="empty-cell">
+                  🐾 Chưa có gì trong giỏ hết trơn! Hãy bấm <strong>🍬 Đổ Mẫu</strong> rồi bấm <strong>🚀 Bắt Đầu Phân Tích</strong> nhé!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: CC GENERATOR PRO (CSPRNG + UNIQUE GUARANTEE)                 -->
+    <!-- =================================================================== -->
+    <section id="tab-generator" class="tab-panel">
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-header">
+            <h2>🪄 Xưởng Đúc Thẻ Phép Thuật CSPRNG (Không Trùng Lặp)</h2>
+            <span class="sub-badge">Chuẩn QA Testing</span>
+          </div>
+
+          <div class="form-group">
+            <label for="gen-bin">Mã BIN (6–8 số) hoặc Khuôn Mẫu (Pattern <code>x</code>):</label>
+            <input
+              type="text"
+              id="gen-bin"
+              class="text-input mono-input input-xl"
+              placeholder="VD: 54243223xxxxxxxx hoặc 453214"
+              value="54243223xxxxxxxx"
+            />
+            <div class="sample-chips">
+              <span class="chip-label">🍬 Khuôn mẫu:</span>
+              <button type="button" class="chip" data-bin="54243223xxxxxxxx">MC 8-số (54243223)</button>
+              <button type="button" class="chip" data-bin="453214xxxxxxxxxx">Visa (453214)</button>
+              <button type="button" class="chip" data-bin="516815xxxxxxxxxx">Apple Card (516815)</button>
+              <button type="button" class="chip" data-bin="371449xxxxxxxxx">Amex 15 số (371449)</button>
+              <button type="button" class="chip" data-bin="970436xxxxxxxxxx">VCB (970436)</button>
+              <button type="button" class="chip" data-bin="546034xxxxxxxxxx">CAKE (546034)</button>
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="gen-month">Tháng (MM):</label>
+              <select id="gen-month" class="select-input">
+                <option value="rnd">🎲 Ngẫu nhiên (01–12)</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="gen-year">Năm (YY):</label>
+              <select id="gen-year" class="select-input">
+                <option value="rnd">🎲 Ngẫu nhiên (2027–2032)</option>
+                <option value="27">2027 (27)</option>
+                <option value="28">2028 (28)</option>
+                <option value="29">2029 (29)</option>
+                <option value="30">2030 (30)</option>
+                <option value="31">2031 (31)</option>
+                <option value="32">2032 (32)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="gen-cvv">Mã CVV:</label>
+              <input type="text" id="gen-cvv" class="text-input mono-input" placeholder="Trống = Ngẫu nhiên" maxlength="4" />
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="gen-length">Độ dài thẻ:</label>
+              <select id="gen-length" class="select-input">
+                <option value="auto">✨ Tự động (Amex 15 / Khác 16)</option>
+                <option value="16">16 chữ số (Chuẩn quốc tế)</option>
+                <option value="15">15 chữ số (Amex)</option>
+                <option value="19">19 chữ số (NAPAS / Mở rộng)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="gen-qty">Số lượng (1 – 1000):</label>
+              <input type="number" id="gen-qty" class="text-input" value="20" min="1" max="1000" />
+            </div>
+
+            <div class="form-group">
+              <label for="gen-format">Định dạng xuất:</label>
+              <select id="gen-format" class="select-input">
+                <option value="pipe">PAN|MM|YY|CVV (Chuẩn)</option>
+                <option value="slash">PAN|MM/YY|CVV</option>
+                <option value="csv">CSV (PAN,MM,YY,CVV,Scheme)</option>
+                <option value="pan_only">Chỉ số thẻ (PAN)</option>
+                <option value="json">JSON Array</option>
+                <option value="sql">SQL INSERT (QA Seed)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="button" id="btn-generate" class="btn btn-primary btn-lg">🪄 Đúc Thẻ Chuẩn Luhn Ngay!</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>📤 Mẻ Thẻ Vừa Ra Lò (<span id="gen-count-badge">0</span> thẻ độc nhất)</h2>
+            <div class="export-group">
+              <button type="button" id="btn-copy-gen" class="btn btn-sm btn-success">📋 Copy Tất Cả</button>
+              <button type="button" id="btn-send-to-bulk" class="btn btn-sm btn-magic">➡️ Đẩy Sang Bulk Check</button>
+              <button type="button" id="btn-dl-gen" class="btn btn-sm btn-outline">💾 Lưu File</button>
+            </div>
+          </div>
+          <textarea id="gen-output" class="code-textarea" rows="15" readonly placeholder="Danh sách thẻ phép thuật chuẩn CSPRNG sẽ hiện ở đây..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 4: BIN COMPARATOR & OFFICIAL SANDBOX QA SUITE (NEW!)            -->
+    <!-- =================================================================== -->
+    <section id="tab-compare" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <h2>🆚 Bàn Cân So Sánh 2 Đầu BIN Trực Tiếp (6–8 Số)</h2>
+          <span class="sub-badge">Phát hiện lệch vùng AVS &amp; Sub-allocation</span>
+        </div>
+        <div class="compare-inputs-row">
+          <div class="compare-input-col">
+            <label for="cmpBinA">🅰️ Đầu BIN thứ nhất:</label>
+            <input type="text" id="cmpBinA" class="text-input mono-input input-xl" value="542432" placeholder="VD: 542432" />
+          </div>
+          <div class="compare-vs-badge">VS</div>
+          <div class="compare-input-col">
+            <label for="cmpBinB">🅱️ Đầu BIN thứ hai:</label>
+            <input type="text" id="cmpBinB" class="text-input mono-input input-xl" value="54243223" placeholder="VD: 54243223" />
+          </div>
+          <button type="button" id="btnRunCompare" class="btn btn-primary btn-lg">⚖️ So Sánh Ngay!</button>
+        </div>
+
+        <div class="sample-chips" style="margin-bottom:16px">
+          <span class="chip-label">🍬 Cặp so sánh hay:</span>
+          <button type="button" class="cmp-pair-chip chip" data-a="542432" data-b="54243223">542432 (US) vs 54243223 (Nepal 8-số)</button>
+          <button type="button" class="cmp-pair-chip chip" data-a="414720" data-b="428310">414720 (Chase US) vs 428310 (VCB VN)</button>
+          <button type="button" class="cmp-pair-chip chip" data-a="490301" data-b="516815">490301 (Revolut Prepaid) vs 516815 (Apple Credit)</button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tiêu chí đối chiếu</th>
+                <th id="cmpHeadA">🅰️ BIN A</th>
+                <th id="cmpHeadB">🅱️ BIN B</th>
+                <th>Nhận xét của Thám tử Neko</th>
+              </tr>
+            </thead>
+            <tbody id="cmpResultBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- OFFICIAL SANDBOX QA TEST CARDS -->
+      <div class="card" style="margin-top:22px">
+        <div class="card-header">
+          <h2>🧪 Kho Thẻ Test Cổng Thanh Toán Chuẩn Quốc Tế (Sandbox QA Suite)</h2>
+          <button type="button" id="btnLoadAllSandboxToBulk" class="btn btn-sm btn-magic">🚀 Đẩy Toàn Bộ Vào Bulk Simulator</button>
+        </div>
+        <p class="help-text">
+          Bộ thẻ thử nghiệm chính thức dành cho Lập trình viên &amp; QA kiểm thử kịch bản thanh toán (Approved, 3DS2 Challenge, Không đủ số dư, Thẻ hết hạn, Sai CVC).
+        </p>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Số thẻ Sandbox (PAN)</th>
+                <th>Mạng thẻ</th>
+                <th>Kịch bản phản hồi (Expected Scenario)</th>
+                <th>Mã Code</th>
+                <th>Thao tác nhanh</th>
+              </tr>
+            </thead>
+            <tbody id="sandboxSuiteBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 5: EXPANDED OFFLINE BIN DATABASE                                -->
+    <!-- =================================================================== -->
+    <section id="tab-bindb" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <h2>🏦 Kho Báu <span id="binDbTotalBadge">60+</span> BIN Quốc Tế &amp; Ngân Hàng Việt Nam</h2>
+          <div class="header-actions">
+            <button type="button" class="db-region-pill filter-pill active" data-region="ALL">🌏 Tất cả</button>
+            <button type="button" class="db-region-pill filter-pill" data-region="VN">🇻🇳 Việt Nam</button>
+            <button type="button" class="db-region-pill filter-pill" data-region="US">🇺🇸 Mỹ (US)</button>
+            <button type="button" class="db-region-pill filter-pill" data-region="PREPAID">💳 Prepaid</button>
+            <input type="text" id="bin-filter-input" class="text-input input-sm" placeholder="🔍 Tìm BIN, Ngân hàng, Quốc gia..." />
+          </div>
+        </div>
+        <div class="table-container" style="max-height:560px">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Đầu BIN (6/8 số)</th>
+                <th>Mạng thẻ</th>
+                <th>Loại (Funding)</th>
+                <th>Hạng (Tier)</th>
+                <th>Ngân hàng phát hành</th>
+                <th>Quốc gia &amp; Tiền tệ</th>
+                <th>Chính sách Vùng / AVS</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="bin-db-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer-bar">
+    <div>🐾 <strong>NekoBIN &amp; CC Studio Chibi v4.0</strong> · Thiết kế chuẩn ISO/IEC 7812 &amp; Toán học Luhn Mod-10 phục vụ kiểm thử QA/Fintech an toàn.</div>
+    <div>✨ 100% Mã nguồn sạch · Không lưu dữ liệu người dùng · Tương thích Vercel Serverless</div>
+  </footer>
+
+  <div id="toast" class="toast hidden">🐾 Đã sao chép thành công!</div>
+  <script src="/app.js"></script>
+</body>
+</html>

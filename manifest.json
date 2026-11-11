@@ -1,0 +1,16 @@
+{
+  "name": "NekoBIN & CC Studio Chibi v4.0",
+  "short_name": "NekoBIN Chibi",
+  "description": "Trợ lý Thám tử Chibi soi BIN 6–8 số, Giải phẫu ISO/IEC 7812, So sánh BIN, Luhn Mod-10 & QA Sandbox",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff0f6",
+  "theme_color": "#ff6b9d",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
